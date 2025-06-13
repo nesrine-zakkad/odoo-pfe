@@ -10,9 +10,11 @@
                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
                             <div class="mb-3">
-                                <label for="topic_title" class="form-label"> Title
+                                <label for="topic_title" class="form-label">Topic Title
                                     <span class="text-danger">*</span>
                                 </label>
+                                <input type="text" name="title" id="topic_title" class="form-control"
+                                       placeholder="Enter topic title" required="required"/>
                             </div>
 
                             <div class="mb-3">
@@ -68,7 +70,10 @@
                                 </button>
                             </div>
 
-                            <button type="submit" class="btn btn-primary w-100">Submit </button>
+
+
+
+                            <button type="submit" class="btn btn-primary w-100">Create Topic</button>
 
                             <t t-if="error">
                                 <div class="alert alert-danger mt-3" role="alert">
