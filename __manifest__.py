@@ -36,6 +36,7 @@
         'views/list_topic_public.xml',
         'views/portal_dissertation_portal.xml',
         'views/eventview.xml',
+        'views/login.xml',
         'reports/dissertation_re.xml',
     ],
     'images': ['static/description/icon.png'],
