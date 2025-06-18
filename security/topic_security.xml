@@ -11,6 +11,17 @@
     <field name="perm_create" eval="0"/>
     <field name="perm_unlink" eval="0"/>
 </record>
+        <record id="pfe_dissertation_rule_admin" model="ir.rule">
+    <field name="name">Dissertation: Full Access for Admin</field>
+    <field name="model_id" ref="model_pfe_dissertation"/>
+    <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+</record>
+
 <!--        <record id="topic_rule_teacher_own_only" model="ir.rule">-->
 <!--    <field name="name">Topic: Only Own Topics (Teacher)</field>-->
 <!--    <field name="model_id" ref="model_pfe_topic"/>-->

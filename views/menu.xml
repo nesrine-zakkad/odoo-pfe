@@ -4,7 +4,7 @@
     <record id="action_student_list" model="ir.actions.act_window">
         <field name="name">Students</field>
         <field name="res_model">hr.employee</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form</field>
         <field name="view_id" ref="pfe.view_student_tree"/>
         <field name="domain">[('is_student', '=', True)]</field>
         <field name="context">{'group_by': ['specialization_id', 'education_level_id']}</field>

@@ -89,7 +89,7 @@
         </field>
     </record>
 
-    <!-- ========== MENU ITEM ========== -->
-    <menuitem id="menu_dissertation_defense" name="Dissertation defense"
-              parent="pfe_main_menu" action="action_pfe_defense"/>
+<!--    &lt;!&ndash; ========== MENU ITEM ========== &ndash;&gt;-->
+<!--    <menuitem id="menu_dissertation_defense" name="Dissertation defense"-->
+<!--              parent="pfe_main_menu" action="action_pfe_defense"/>-->
 </odoo>
