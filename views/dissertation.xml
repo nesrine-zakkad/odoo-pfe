@@ -38,6 +38,10 @@
                             <field name="category_ids" widget="many2many_tags"/>
 
                         </group>
+                        <group string="Submission">
+                    <field name="submission_filename" readonly="1"/>
+                    <field name="submission_file" filename="submission_filename"/>
+                </group>
                     </group>
 
 

@@ -1,4 +1,4 @@
-from odoo import models, fields, api, exceptions
+from odoo import models, fields, api, exceptions, _
 
 
 class StudentGroup(models.Model):
@@ -37,7 +37,7 @@ class StudentGroup(models.Model):
     academic_year_id = fields.Many2one(
         'event.event',
         string="Academic Year",
-          )
+    )
 
     selected_dissertation_id = fields.Many2one(
         comodel_name='pfe.dissertation',
@@ -107,3 +107,11 @@ class StudentGroup(models.Model):
                     groupe.selected_dissertation_id = dissertation.id
                     dissertation.group_id = groupe.id
                     break
+
+
+    @api.model
+    def create(self, vals):
+    # توليد الرقم التسلسلي
+        if vals.get('name', _('New')) == _('New'):
+              vals['name'] = self.env['ir.sequence'].next_by_code('pfe.sgroupe') or _('New')
+        return super(StudentGroup, self).create(vals)

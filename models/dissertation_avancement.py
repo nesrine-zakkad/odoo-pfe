@@ -19,3 +19,4 @@ class DissertationAvancement(models.Model):
         ('design', 'Design '),
         ('implementation', 'Implementation'),
     ], string="Stage", required=True, default='state_of_art_study')
+

@@ -2,6 +2,8 @@ from odoo import models, fields,exceptions
 
 class Dissertation(models.Model):
     _name = 'pfe.dissertation'
+    _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin', 'utm.mixin']
+
     _description = 'Dissertation'
     _rec_name="name"
     name = fields.Char(
@@ -33,6 +35,8 @@ class Dissertation(models.Model):
         ('validated', 'Validated'),
         ('rejected', 'Rejected'),
     ], string="State", default='draft', tracking=True)
+    submission_file = fields.Binary("Submission File")
+    submission_filename = fields.Char("Filename")
     topic_id = fields.Many2one('pfe.topic', string="Topic", required=True, readonly=True)
     supervisor_id = fields.Many2one('hr.employee', string="Supervisor")
     avancement_ids = fields.One2many('pfe.dissertation.avancement', 'dissertation_id', string="Progress")

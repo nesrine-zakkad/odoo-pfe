@@ -1,37 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="topic_detail" name="Topic Details">
-        <t t-call="portal.portal_layout">
-            <t t-set="o_portal_fullwidth_alert" groups="base.group_user">
-                <t t-call="portal.portal_back_in_edit_mode">
-                    <t t-set="backend_url" t-value="'/web#model=pfe.topic&amp;id=%s&amp;view_type=form' % (topic.id)"/>
-                </t>
+    <template id="topic_detail" name="Topic Details Cleaned">
+    <t t-call="portal.portal_layout">
+        <t t-set="o_portal_fullwidth_alert" groups="base.group_user">
+            <t t-call="portal.portal_back_in_edit_mode">
+                <t t-set="backend_url" t-value="'/web#model=pfe.topic&amp;id=%s&amp;view_type=form' % (topic.id)"/>
             </t>
-            <t t-call="portal.portal_record_layout">
-                <t t-set="card_header">
-                    <section style="background-color: #eee;">
-                        <div class="container py-5"/>
+        </t>
+
+        <t t-call="portal.portal_record_layout">
+            <t t-set="card_header">
+                <section style="background-color: #eee;">
+                    <div class="container py-5">
+                        <!-- Breadcrumb -->
                         <div class="row">
                             <div class="col">
                                 <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
                                     <ol class="breadcrumb mb-0">
-                                        <li class="breadcrumb-item">
-                                            <a href="/my/home">Home</a>
-                                        </li>
-                                        <li class="breadcrumb-item">
-                                            <a href="/topic/liste/?{{ keep_query() }}">Topics</a>
-                                        </li>
-                                        <li class="breadcrumb-item active" aria-current="page">
-                                            <t t-esc="topic.title"/>
-                                        </li>
+                                        <li class="breadcrumb-item"><a href="/my/home">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="/topic/liste/?{{ keep_query() }}">Topics</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page"><t t-esc="topic.title"/></li>
                                     </ol>
                                 </nav>
                             </div>
                         </div>
 
-
+                        <!-- Edit button ABOVE the detail card -->
+                        <t t-if="topic.supervisor_id.user_id.id == user_id.id and topic.state == 'pending'">
+                            <div class="text-end mb-3">
+                                <a t-attf-href="/topic/edit/{{ topic.id }}" class="btn btn-outline-primary btn-sm">
+                                    ✏️ Edit Topic
+                                </a>
+                            </div>
+                        </t>
 
                         <div class="row">
+                            <!-- Supervisor Info -->
                             <div class="col-lg-4">
                                 <div class="card mb-4">
                                     <div class="card-body text-center">
@@ -49,78 +53,51 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <!-- Topic Details -->
                             <div class="col-lg-8">
                                 <div class="card mb-4">
-
-
                                     <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0">Reference</p>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <p class="text-muted mb-0">
-                                                    <t t-esc="topic.name"/>
-                                                </p>
-                                            </div>
+                                        <div class="row mb-2">
+                                            <div class="col-sm-3"><strong>Reference</strong></div>
+                                            <div class="col-sm-9 text-muted"><t t-esc="topic.name"/></div>
                                         </div>
                                         <hr/>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0">Title</p>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <p class="text-muted mb-0">
-                                                    <t t-esc="topic.title"/>
-                                                </p>
-                                            </div>
+                                        <div class="row mb-2">
+                                            <div class="col-sm-3"><strong>Title</strong></div>
+                                            <div class="col-sm-9 text-muted"><t t-esc="topic.title"/></div>
                                         </div>
                                         <hr/>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0">Status</p>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <p class="text-muted mb-0">
-                                                    <t t-esc="topic.state"/>
-                                                </p>
-                                            </div>
+                                        <div class="row mb-2">
+                                            <div class="col-sm-3"><strong>Status</strong></div>
+                                            <div class="col-sm-9 text-muted"><t t-esc="topic.state"/></div>
                                         </div>
                                         <hr/>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0">Description</p>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <p class="text-muted mb-0">
-                                                    <t t-esc="topic.description or 'Not available'"/>
-                                                </p>
-                                            </div>
+                                        <div class="row mb-2">
+                                            <div class="col-sm-3"><strong>Description</strong></div>
+                                            <div class="col-sm-9 text-muted"><t t-esc="topic.description or 'Not available'"/></div>
                                         </div>
                                         <hr/>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0">Reference</p>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <p class="text-muted mb-0">
-                                                    <t t-esc="topic.reference"/>
-                                                </p>
-                                            </div>
+                                        <div class="row mb-2">
+                                            <div class="col-sm-3"><strong>Tools</strong></div>
+                                            <div class="col-sm-9 text-muted"><t t-esc="topic.tools or 'Not available'"/></div>
                                         </div>
                                         <hr/>
-
+                                        <div class="row mb-2">
+                                            <div class="col-sm-3"><strong>References</strong></div>
+                                            <div class="col-sm-9 text-muted"><t t-esc="topic.reference"/></div>
+                                        </div>
+                                        <hr/>
+                                        <!-- Attachments -->
                                         <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0">Attachments</p>
-                                            </div>
+                                            <div class="col-sm-3"><strong>Attachments</strong></div>
                                             <div class="col-sm-9">
                                                 <t t-if="topic.attachment_ids">
                                                     <ul class="list-group">
                                                         <t t-foreach="topic.attachment_ids" t-as="attach">
                                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                <a t-attf-href="/web/content/{{ attach.id }}?download=true"
-                                                                   target="_blank">
+                                                                <a t-attf-href="/web/content/{{ attach.id }}?download=true" target="_blank">
                                                                     <t t-esc="attach.name"/>
                                                                 </a>
                                                                 <t t-if="topic.create_uid.id == request.env.user.id and topic.state == 'pending'">
@@ -135,41 +112,40 @@
                                                     </ul>
                                                 </t>
                                                 <t t-else="">
-                                                    <p class="text-muted mb-0">No attachments available.</p>
+                                                    <p class="text-muted">No attachments available.</p>
                                                 </t>
                                             </div>
                                         </div>
-
-                                        <hr/>
-
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
-                </t>
+                    </div>
+                </section>
             </t>
-            <div class="mt32">
-                <h4>
-                    <strong>Message and Communication History</strong>
-                </h4>
-                <t t-call="portal.message_thread">
-                    <t t-set="object" t-value="topic"/>
-                </t>
-            </div>
         </t>
-    </template>
 
-<!--    <template id="portal_my_home_topic" name="Topics" inherit_id="portal.portal_my_home" priority="1">
+        <!-- Message thread -->
+        <div class="container mt-5 mb-4">
+            <h4><strong>Message and Communication History</strong></h4>
+            <t t-call="portal.message_thread">
+                <t t-set="object" t-value="topic"/>
+            </t>
+        </div>
+    </t>
+</template>
+
+
+
+    <template id="portal_my_home_topic" name="Topics" inherit_id="portal.portal_my_home" priority="1">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Topics</t>
-&lt;!&ndash;                <t t-set="url" t-value="'/topic/liste/'"/>&ndash;&gt;
+                <t t-set="url" t-value="'/topic/liste/'"/>
                 <t t-set="placeholder_count" t-value="'count_topic'"/>
             </t>
         </xpath>
-    </template>-->
+    </template>
 
         <template id="portal_my_home_topic" name="Topics" customize_show="True" inherit_id="portal.portal_my_home" priority="20">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">

@@ -24,8 +24,8 @@ class DissertationCustomerPortal(CustomerPortal):
 
         if employee and employee.is_student:
             domain.append(('group_id', '=', employee.group_id.id))
-        # else:
-        #     domain.append(('topic_id.create_uid', '=', user_id))
+        else:
+             domain.append(('topic_id.create_uid', '=', user_id))
 
         dissertations = request.env['pfe.dissertation'].sudo().search(domain)
 

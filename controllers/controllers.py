@@ -53,10 +53,15 @@ class TopicWebsiteController(http.Controller):
                 attachment_ids.append(attachment.id)
 
         try:
+            employee = request.env.user.employee_id
+            teacher_tag = request.env['hr.employee.category'].sudo().search([('name', '=', 'Teacher')], limit=1)
+
+            if not employee or employee.is_student or teacher_tag not in employee.category_ids:
+                return request.not_found()
             if not title or not description or not tools:
                 raise ValidationError("Please fill in all the required fields.")
 
-            employee = request.env.user.employee_id
+
             request.env['pfe.topic'].sudo().create({
                 'title': title,
                 'description': description,

@@ -27,3 +27,4 @@ class DissertationPortal(http.Controller):
         })
 
         return request.redirect('/dissertation/detail/%s' % dissertation_id)
+

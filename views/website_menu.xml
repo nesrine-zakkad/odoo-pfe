@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
         <!-- Menu item "Topic" in Website main menu -->
         <record id="menu_website_topic" model="website.menu">
             <field name="name">Topic</field>
@@ -18,6 +19,7 @@
             <field name="website_id" ref="website.default_website"/>
             <field name="parent_id" ref="menu_website_topic"/>
             <field name="sequence" type="int">1</field>
+
         </record>
 
         <record id="choose_topic" model="website.menu">

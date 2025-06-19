@@ -16,7 +16,7 @@
         <record id="action_pfe_sgroupe" model="ir.actions.act_window">
             <field name="name">Student Groups</field>
             <field name="res_model">pfe.sgroupe</field>
-            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="context">{}</field>
             <field name="domain">[]</field>
         </record>
@@ -33,6 +33,7 @@
                     <sheet>
                         <group>
                             <field name="name" readonly="1"/>
+                            <field name="G_name" />
                             <field name="leader_id"/>
                             <field name="academic_year_id"/>
                             <field name="leader_user_id" invisible="1"/>
@@ -78,6 +79,7 @@
                                 groups="pfe.group_department_head,base.group_system"/>
                     </header>
                     <field name="name"/>
+                    <field name="G_name"/>
                     <field name="group_avg"/>
                     <field name="leader_id"/>
                     <field name="student_ids" />
@@ -102,6 +104,9 @@
                                     </span>
                                 </div>
                                 <div class="o_kanban_details">
+                                    <strong>Group Name:</strong>
+                                    <field name="G_name"/>
+                                    <br/>
                                     <strong>Group Average:</strong>
                                     <field name="group_avg"/>
                                     <br/>
