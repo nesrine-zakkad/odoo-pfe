@@ -26,6 +26,8 @@
                             <field name="education_level_id"/>
                             <field name="avg_grade"/>
                             <field name="group_id"/>
+                            <field name="is_student"/>
+
                         </group>
                     </sheet>
                 </form>

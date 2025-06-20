@@ -11,5 +11,4 @@ from . import education_level
 from . import dissertation_avancement
 from . import choose_list
 from . import _departement
-from . import grade
 from . import topic_categories

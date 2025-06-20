@@ -1,4 +1,4 @@
-from odoo import models, fields, api, exceptions, _
+from odoo import models, fields, api, exceptions,_
 
 
 class StudentGroup(models.Model):
@@ -11,7 +11,7 @@ class StudentGroup(models.Model):
         required=True,
         copy=False,
         readonly=True,
-        default=lambda self: self.env['ir.sequence'].next_by_code('pfe.sgroupe')
+        default='New'
     )
 
     G_name = fields.Char(string='Group Name', required=False)
@@ -108,10 +108,8 @@ class StudentGroup(models.Model):
                     dissertation.group_id = groupe.id
                     break
 
-
     @api.model
     def create(self, vals):
-    # توليد الرقم التسلسلي
         if vals.get('name', _('New')) == _('New'):
-              vals['name'] = self.env['ir.sequence'].next_by_code('pfe.sgroupe') or _('New')
+            vals['name'] = self.env['ir.sequence'].next_by_code('pfe.sgroupe') or _('New')
         return super(StudentGroup, self).create(vals)
